@@ -76,11 +76,12 @@ const Gallary = () => {
   return (
     <section id="gallary" className="py-12 bg-gray-50">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-8">Our Gallery</h2>
+        <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Our Gallery</h2>
 
         {/* Category Header - Select Category */}
         <div className="w-full mb-6">
-          <div className="flex justify-center space-x-6">
+          {/* Grid Layout for Category Buttons */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 justify-center">
             {gallaryInfo.map((item, index) => (
               <button
                 key={index}
@@ -97,8 +98,8 @@ const Gallary = () => {
           </div>
         </div>
 
-        {/* Fixed Grid Layout with Smaller Grids */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {/* Image Grid Layout */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
           {/* Loop through images and quotes to display */}
           {imagesToDisplay.map((item, index) => {
             const isImage = item.startsWith("/gallary/"); // Check if the item is an image
@@ -106,7 +107,7 @@ const Gallary = () => {
               <div
                 key={index}
                 className={`relative overflow-hidden border border-gray-200 rounded-lg ${
-                  isImage ? "h-[250px]" : "h-[200px]" // Adjust height for images and quotes
+                  isImage ? "h-[200px] sm:h-[250px]" : "h-[200px]" // Adjust height for images and quotes
                 }`}
               >
                 {isImage ? (
