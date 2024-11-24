@@ -13,7 +13,7 @@ const DesignSessionForm = ({ setOpenForm }) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
-
+console.log("DesignSessionForm");
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -84,8 +84,8 @@ const DesignSessionForm = ({ setOpenForm }) => {
   }, []);
 
   return (
-    <section className="absolute inset-0 z-50 bg-gray-900 bg-opacity-70 flex items-center justify-center">
-      <div className="container mx-auto px-6 relative max-w-2xl bg-white p-8 rounded-lg shadow-lg">
+    <section className="absolute w-screen h-screen inset-0 z-[9999] bg-gray-900 bg-opacity-70 flex items-center justify-center">
+      <div className="container mx-auto px-6 relative max-w-xl bg-white p-8 rounded-xl shadow-xl">
         {/* Close Button */}
         <div className="absolute top-4 right-4">
           <button
@@ -113,22 +113,7 @@ const DesignSessionForm = ({ setOpenForm }) => {
               value={formData.name}
               onChange={handleInputChange}
               required
-              className="w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFD700] transition duration-300"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700">
-              Enter Your Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              required
-              className="w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFD700] transition duration-300"
+              className="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FFD700] transition duration-300"
             />
           </div>
 
@@ -143,7 +128,7 @@ const DesignSessionForm = ({ setOpenForm }) => {
               value={formData.mobile}
               onChange={handleInputChange}
               required
-              className="w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFD700] transition duration-300"
+              className="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FFD700] transition duration-300"
             />
           </div>
 
@@ -165,20 +150,6 @@ const DesignSessionForm = ({ setOpenForm }) => {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="optOut" className="flex items-center text-gray-700">
-              <input
-                type="checkbox"
-                id="optOut"
-                name="optOut"
-                checked={formData.optOut}
-                onChange={handleInputChange}
-                className="mr-2"
-              />
-              Uncheck to opt-out of upcoming meetings and offer alerts
-            </label>
-          </div>
-
-          <div className="mb-4">
             <label htmlFor="pincode" className="block text-gray-700">
               Enter Your Current Residence Pincode
             </label>
@@ -189,16 +160,16 @@ const DesignSessionForm = ({ setOpenForm }) => {
               value={formData.pincode}
               onChange={handleInputChange}
               required
-              className="w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFD700] transition duration-300"
+              className="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FFD700] transition duration-300"
             />
           </div>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-3 bg-[#FFD700] text-white rounded-md hover:bg-yellow-500 transition duration-300"
+            className="w-full py-3 bg-[#FFD700] text-white font-semibold rounded-lg hover:bg-yellow-500 transition duration-300"
           >
-            {isSubmitting ? "Booking..." : "Book Design Session"}
+            {isSubmitting ? "Booking..." : "Get Free Quote"}
           </button>
 
           {responseMessage && (

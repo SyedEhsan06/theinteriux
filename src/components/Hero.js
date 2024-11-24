@@ -1,7 +1,9 @@
 // /components/Hero.js
 import React from 'react';
-
+import FormOpenButton from './FormOpenButton';
+import Link from 'next/link';
 const Hero = () => {
+  
   return (
     <section className="relative bg-cover bg-[#FFD700] bg-center h-screen" style={{ backgroundImage: "url('/gallary/1.jpeg')" }}>
       <div className="grid grid-cols-6 grid-rows-6 gap-0 w-full h-full">
@@ -66,16 +68,21 @@ const Hero = () => {
         {/* Action Buttons */}
         <div className="mt-8 space-x-4 flex flex-col sm:flex-row justify-center">
           {/* View Portfolio Button */}
-          <button className="bg-[#FFD700] text-black hover:bg-yellow-500 hover:scale-105 transition transform duration-300 px-8 py-4 rounded-full font-semibold shadow-lg focus:outline-none">
+          <a href={'#gallary'}>
+          <button
+            
+          className="bg-[#FFD700] text-black hover:bg-yellow-500 hover:scale-105 transition transform duration-300 px-8 py-4 rounded-full font-semibold shadow-lg focus:outline-none">
             View Portfolio
           </button>
+          </a>
 
           {/* Book Consultation Button */}
-          <button className="bg-white text-[#FFD700] border-2 border-[#FFD700] hover:bg-[#FFD700] hover:text-white hover:scale-105 transition transform duration-300 mt-4 sm:mt-0 sm:ml-4 px-8 py-4 rounded-full font-semibold shadow-lg focus:outline-none">
-            Book Consultation
-          </button>
+          <FormOpenButton
+            text={"Book Consultation"}
+          className={`bg-white text-[#FFD700] border-2 border-[#FFD700] hover:bg-[#FFD700] hover:text-white hover:scale-105 transition transform duration-300 mt-4 sm:mt-0 sm:ml-4 px-8 py-4 rounded-full font-semibold shadow-lg focus:outline-none`} />
         </div>
       </div>
+     
     </section>
   );
 };
