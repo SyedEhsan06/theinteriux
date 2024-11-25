@@ -26,7 +26,7 @@ const FormOpenButton = ({ className,text }) => {
 
       {/* Conditionally render the form */}
       {isFormOpen && 
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      <div className="fixed z-[50] inset-0 bg-black bg-opacity-50 flex items-center justify-center">
         <DesignSessionForm setOpenForm={setIsFormOpen} />
       </div>
       }

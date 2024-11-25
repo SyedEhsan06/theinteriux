@@ -34,7 +34,7 @@ const Header = () => {
   return (
     <div>
       <header
-        className={`fixed top-0 z-50 w-full transition-transform duration-300 ${
+        className={`fixed top-0 z-30 w-full transition-transform duration-300 ${
           showHeader ? "translate-y-0" : "-translate-y-full"
         } bg-background shadow-md`}
       >
