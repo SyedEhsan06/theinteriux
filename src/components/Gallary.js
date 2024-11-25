@@ -12,11 +12,11 @@ const quotes = [
 
 const Gallary = () => {
   // State to track the selected category
-  const [selectedCategory, setSelectedCategory] = useState("Luxury Kitchen");
+  const [selectedCategory, setSelectedCategory] = useState("Kitchen");
 
   const gallaryInfo = [
     {
-      header: "Luxury Kitchen",
+      header: "Kitchen",
       images: [
         "/gallary/1.jpeg",
         "/gallary/2.jpeg",
@@ -29,7 +29,7 @@ const Gallary = () => {
       ],
     },
     {
-      header: "Luxury Bedroom",
+      header: "Bedroom",
       images: [
         "/gallary/16.jpeg",
         "/gallary/17.jpeg",
@@ -41,7 +41,7 @@ const Gallary = () => {
       ],
     },
     {
-      header: "Luxury Bathroom",
+      header: "Bathroom",
       images: [
         "/gallary/23.jpeg",
         "/gallary/24.jpeg",
@@ -52,7 +52,7 @@ const Gallary = () => {
       ],
     },
     {
-      header: "Modular Kitchen",
+      header: "Living",
       images: [
         "/gallary/9.jpeg",
         "/gallary/10.jpeg",
@@ -74,9 +74,9 @@ const Gallary = () => {
   const imagesToDisplay = selectedCategoryImages.length >= 8 ? selectedCategoryImages : [...selectedCategoryImages, ...quotes.slice(0, 8 - selectedCategoryImages.length)];
 
   return (
-    <section id="gallary" className="py-12 bg-gray-50">
+    <section id="gallary" className="py-12 bg-background">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Our Gallery</h2>
+        <h2 className="text-3xl font-extrabold text-primary mb-8 text-center">Our Gallery</h2>
 
         {/* Category Header - Select Category */}
         <div className="w-full mb-6">
@@ -88,8 +88,8 @@ const Gallary = () => {
                 onClick={() => setSelectedCategory(item.header)}
                 className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 text-lg ${
                   selectedCategory === item.header
-                    ? "bg-[#FFD700] text-white"
-                    : "bg-white text-[#FFD700] hover:bg-[#FFD700] hover:text-white"
+                    ? "bg-primary text-white"
+                    : "bg-neutral-700 text-primary hover:bg-primary hover:text-white"
                 }`}
               >
                 {item.header}
@@ -106,18 +106,16 @@ const Gallary = () => {
             return (
               <div
                 key={index}
-                className={`relative overflow-hidden border border-gray-200 rounded-lg ${
-                  isImage ? "h-[200px] sm:h-[250px]" : "h-[200px]" // Adjust height for images and quotes
-                }`}
+                className={`relative overflow-hidden border border-neutral-700 rounded-lg h-[210px] sm:h-[270px] transition-transform duration-500 transform md:hover:scale-105`}
               >
                 {isImage ? (
                   <img
                     src={item}
                     alt={`Gallery image ${index + 1}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-all duration-500 ease-in-out transform md:hover:scale-110"
                   />
                 ) : (
-                  <div className="flex items-center justify-center h-full p-4 bg-gray-800 text-white text-center text-sm sm:text-lg">
+                  <div className="flex items-center justify-center h-full p-4 bg-primary text-white text-center text-sm sm:text-lg">
                     <p>"{item}"</p>
                   </div>
                 )}

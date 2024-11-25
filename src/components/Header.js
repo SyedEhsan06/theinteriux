@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import DesignSessionForm from "./DesignSessionForm";
+import Link from "next/link";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,45 +16,45 @@ const Header = () => {
       <header className="sticky top-0 z-50 bg-white shadow-md">
         <div className="container mx-auto flex justify-between items-center py-4 px-6">
           {/* Logo and Title */}
-          <a href="/" className="flex items-center space-x-3">
+          <Link href="/" className="flex items-center space-x-3">
             {/* Logo */}
             <img
               src="/logo2nd.png"
               alt="The Interiux"
               className="h-10 object-contain" // Ensures it doesn't stretch and stays within the proper height
             />
-            <h1 className="text-2xl font-bold text-[#FFD700]">The Interiux</h1>
-          </a>
+            <h1 className="text-2xl font-bold text-primary">The Interiux</h1>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8 items-center">
-            <a
-              href="#home"
-              className="text-gray-800 hover:text-[#FFD700] transition duration-300"
+            <Link
+              href="/"
+              className="text-gray-800 hover:text-primary transition duration-300"
             >
               Home
-            </a>
+            </Link>
             <a
               href="/about"
-              className="text-gray-800 hover:text-[#FFD700] transition duration-300"
+              className="text-gray-800 hover:text-primary transition duration-300"
             >
               About Us
             </a>
             <a
               href="#services"
-              className="text-gray-800 hover:text-[#FFD700] transition duration-300"
+              className="text-gray-800 hover:text-primary transition duration-300"
             >
               Services
             </a>
             <a
               href="#gallary"
-              className="text-gray-800 hover:text-[#FFD700] transition duration-300"
+              className="text-gray-800 hover:text-primary transition duration-300"
             >
               Gallery
             </a>
             <a
               href="#contact"
-              className="text-gray-800 hover:text-[#FFD700] transition duration-300"
+              className="text-gray-800 hover:text-primary transition duration-300"
             >
               Contact Us
             </a>
@@ -62,7 +63,7 @@ const Header = () => {
           {/* Mobile Menu Icon */}
           <button
             aria-label="Toggle navigation menu"
-            className="md:hidden text-[#FFD700] focus:outline-none"
+            className="md:hidden text-primary focus:outline-none"
             onClick={toggleMenu}
           >
             {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
@@ -71,7 +72,7 @@ const Header = () => {
           {/* Book Consultation Button */}
           <button
             onClick={() => setOpenForm(true)}
-            className="hidden md:block bg-[#FFD700] text-white py-2 px-6 rounded-lg shadow-md hover:bg-yellow-500 transition duration-300"
+            className="hidden md:block bg-primary text-white py-2 px-6 rounded-lg shadow-md hover:bg-focus transition duration-300"
           >
             Book Consultation
           </button>
@@ -79,7 +80,7 @@ const Header = () => {
 
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-[#FFD700] p-4 absolute top-16 left-0 w-full shadow-lg">
+          <div className="md:hidden bg-primary p-4 absolute top-16 left-0 w-full shadow-lg">
             <nav className="space-y-4 text-center">
               <a
                 href="#home"
@@ -116,7 +117,7 @@ const Header = () => {
                   setOpenForm(true);
                   setIsMenuOpen(false);
                 }}
-                className="block w-full bg-white text-[#FFD700] py-2 px-4 rounded-lg mt-4 hover:bg-yellow-500 transition duration-300"
+                className="block w-full bg-white text-primary py-2 px-4 rounded-lg mt-4 hover:bg-yellow-500 transition duration-300"
               >
                 Book Consultation
               </button>
@@ -127,6 +128,20 @@ const Header = () => {
 
       {/* Show the Design Session Form when the state is true */}
       {openForm && <DesignSessionForm setOpenForm={setOpenForm} />}
+      {/* Whatsapp icon */}
+      <a
+        href="https://wa.me/919022485604"
+        className="fixed bottom-4 right-0 z-50"
+        target="_blank"
+        rel="noreferrer"
+        >
+        <img
+          src="/whatsappicon.png"
+          alt="Whatsapp Icon"
+          className="h-16 object-contain"
+        />
+        </a>
+        
     </div>
   );
 };

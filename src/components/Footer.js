@@ -1,7 +1,7 @@
 // /components/Footer.js
 export default function Footer() {
     return (
-      <footer className="bg-gray-800 text-white py-8">
+      <footer  className="bg-gray-800 text-white py-8">
         <div className="container mx-auto text-center">
           <p className="mb-4">&copy; 2024 The Interiux. All rights reserved.</p>
           <div className="mt-4 space-x-6">

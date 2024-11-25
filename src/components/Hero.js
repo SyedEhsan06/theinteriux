@@ -5,7 +5,7 @@ import Link from 'next/link';
 const Hero = () => {
   
   return (
-    <section className="relative bg-cover bg-[#FFD700] bg-center h-screen" style={{ backgroundImage: "url('/gallary/1.jpeg')" }}>
+    <section className="relative bg-cover bg-primary bg-center h-screen" style={{ backgroundImage: "url('/gallary/1.jpeg')" }}>
       <div className="grid grid-cols-6 grid-rows-6 gap-0 w-full h-full">
         {/* Box 1 - Large Box */}
         <div 
@@ -71,7 +71,7 @@ const Hero = () => {
           <a href={'#gallary'}>
           <button
             
-          className="bg-[#FFD700] text-black hover:bg-yellow-500 hover:scale-105 transition transform duration-300 px-8 py-4 rounded-full font-semibold shadow-lg focus:outline-none">
+          className="bg-primary text-black hover:bg-focus hover:scale-105 transition transform duration-300 px-8 py-4 rounded-full font-semibold shadow-lg focus:outline-none">
             View Portfolio
           </button>
           </a>
@@ -79,7 +79,7 @@ const Hero = () => {
           {/* Book Consultation Button */}
           <FormOpenButton
             text={"Book Consultation"}
-          className={`bg-white text-[#FFD700] border-2 border-[#FFD700] hover:bg-[#FFD700] hover:text-white hover:scale-105 transition transform duration-300 mt-4 sm:mt-0 sm:ml-4 px-8 py-4 rounded-full font-semibold shadow-lg focus:outline-none`} />
+          className={`bg-white text-primary border-2 border-primary hover:bg-primary hover:text-white hover:scale-105 transition transform duration-300 mt-4 sm:mt-0 sm:ml-4 px-8 py-4 rounded-full font-semibold shadow-lg focus:outline-none`} />
         </div>
       </div>
      

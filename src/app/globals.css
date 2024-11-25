@@ -2,3 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+    height: 10px; /* Height of the scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #e1b544; /* Gold color from the theme for the thumb */
+    border-radius: 5px; /* Rounded corners for smooth look */
+    border: 2px solid #1f1f1f; /* Dark background border for contrast */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #d99e2a; /* Slightly darker gold on hover for feedback */
+}
+
+::-webkit-scrollbar-track {
+    background-color: #333333; /* Dark gray for the track */
+    border-radius: 5px; /* Rounded corners for consistency */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.5);
+    right:10px;
+    padding: 30px;
+    color: #d99e2a !important;
+    border-radius: 50%;
+    fill: black !important;
+    stroke: black !important;
+}
