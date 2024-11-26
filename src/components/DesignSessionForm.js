@@ -1,79 +1,100 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MdClose } from "react-icons/md";
+import Swal from 'sweetalert2';
 
 const DesignSessionForm = ({ setOpenForm }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    mobile: "",
-    whatsapp: false,
-    optOut: false,
-  });
+  const formRef = useRef(null); // Ref for the form
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
-  console.log("DesignSessionForm");
-
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const form = formRef.current;
+    const formData = new FormData(form);
+
+    // Prepare data for submission
+    const data = {
+      Name: formData.get("Name"),
+      Phone: formData.get("Phone"),
+      Email: formData.get("Email"),
+      WhatsApp: formData.get("WhatsApp") || "No", // Default to "No" if no selection
+    };
+
     // Validate the form data before submitting
-    if (!validateForm()) {
+    if (!validateForm(data)) {
       setResponseMessage("Please fill in all fields correctly.");
       setIsSubmitting(false);
       return;
     }
 
-    // Post the form data to Formspree or any backend API
-    const res = await fetch("https://formspree.io/f/your-endpoint", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    try {
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbwHIHGD6OMYjDftzdxO35Tfwr9TXV6siQA1XpwndKXcS51JvDwcpOJOof-PKP-Ga5AOyg/exec",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
-    const data = await res.json();
-    setIsSubmitting(false);
+      const result = await response.json();
+      console.log("Form submission response:", result);
 
-    if (data.ok) {
-      setResponseMessage("Thank you! Your booking has been received.");
-    } else {
-      setResponseMessage("Something went wrong. Please try again.");
+      if (result.result === "success") {
+
+        setResponseMessage("Thank you! Your booking has been received.");
+        form.reset(); // Reset the form after successful submission
+
+        // Show success popup with SweetAlert2
+        Swal.fire({
+          icon: 'success',
+          zindex: 9999,
+          title: 'Booking Received!',
+          text: 'Your design session has been successfully booked.',
+          confirmButtonText: 'OK',
+          color:'#e1b544', 
+          background:'#1f1f1f'
+          });
+        setOpenForm(false); // Close the form after successful submission
+      } else {
+        setResponseMessage(result.message || "Something went wrong. Please try again.");
+        
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setResponseMessage("There was a problem submitting the form. Please try again.");
+
+      // Show error popup with SweetAlert2
+      Swal.fire({
+        icon: 'error',
+        zindex: 9999,
+          background:'#1f1f1f',
+          color:'red',
+        title: 'Oops...',
+        text: 'Something went wrong. Please try again later.',
+        confirmButtonText: 'OK',
+        
+      });
+      setOpenForm(false); // Close the form after successful submission
     }
 
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      mobile: "",
-      whatsapp: false,
-      optOut: false,
-    });
+    setIsSubmitting(false);
   };
 
-  // Form validation to ensure data is entered correctly
-  const validateForm = () => {
-    const { name, email, mobile } = formData;
+  // Validate the form data
+  const validateForm = (data) => {
+    const { Name, Email, Phone } = data;
     return (
-      name &&
-      email &&
-      mobile &&
-      /^\d+$/.test(mobile) &&
-      /\S+@\S+\.\S+/.test(email) // Added email validation regex
+      Name &&
+      Email &&
+      Phone &&
+      /^\d+$/.test(Phone) && // Validate that the phone number is numeric
+      /\S+@\S+\.\S+/.test(Email) // Validate email format
     );
   };
 
-  // Disable scroll when the form is open
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -82,7 +103,7 @@ const DesignSessionForm = ({ setOpenForm }) => {
   }, []);
 
   return (
-    <section className="absolute w-screen h-screen inset-0 z-[9999] bg-background bg-opacity-70 flex items-center justify-center">
+    <section className="absolute w-screen h-screen inset-0 z-50 bg-background bg-opacity-70 flex items-center justify-center">
       <div className="container mx-auto px-6 relative max-w-xl bg-white p-8 rounded-xl shadow-xl">
         {/* Close Button */}
         <div className="absolute top-4 right-4">
@@ -95,67 +116,58 @@ const DesignSessionForm = ({ setOpenForm }) => {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit}>
+        <form ref={formRef} onSubmit={handleSubmit}>
           <h2 className="text-2xl font-semibold text-center text-primary mb-6">
             Book Your Design Session
           </h2>
 
           <div className="mb-6">
-            <label htmlFor="name" className="block text-foreground font-medium">
+            <label htmlFor="Name" className="block text-foreground font-medium">
               Enter Your Name
             </label>
             <input
               type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
+              id="Name"
+              name="Name"
               required
               className="w-full p-4 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-focus transition duration-300"
             />
           </div>
 
           <div className="mb-6">
-            <label htmlFor="mobile" className="block text-foreground font-medium">
-              Enter Your Mobile Number
+            <label htmlFor="Phone" className="block text-foreground font-medium">
+              Enter Your phone Number
             </label>
             <input
               type="text"
-              id="mobile"
-              name="mobile"
-              value={formData.mobile}
-              onChange={handleInputChange}
+              id="Phone"
+              name="Phone"
               required
               className="w-full p-4 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-focus transition duration-300"
             />
           </div>
 
           <div className="mb-6">
-            <label htmlFor="email" className="block text-foreground font-medium">
+            <label htmlFor="Email" className="block text-foreground font-medium">
               Enter Your Email Address
             </label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
+              type="Email"
+              id="Email"
+              name="Email"
               required
               className="w-full p-4 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-focus transition duration-300"
             />
           </div>
 
-          {/* Checkbox at the end */}
           <div className="mb-6 flex items-center justify-start">
             <input
               type="checkbox"
-              id="whatsapp"
-              name="whatsapp"
-              checked={formData.whatsapp}
-              onChange={handleInputChange}
+              id="WhatsApp"
+              name="WhatsApp"
               className="mr-4 w-5 h-5 text-primary border-gray-300 rounded-sm"
             />
-            <label htmlFor="whatsapp" className="text-foreground text-sm">
+            <label htmlFor="WhatsApp" className="text-foreground text-sm">
               You can reach me on WhatsApp/RCS
             </label>
           </div>
